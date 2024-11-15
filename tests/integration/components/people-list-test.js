@@ -7,20 +7,13 @@ module('Integration | Component | people-list', function (hooks) {
   setupRenderingTest(hooks);
 
   test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
-
-    await render(hbs`<PeopleList />`);
-
-    assert.dom().hasText('');
-
-    // Template block usage:
+    this.setProperties('people', ['Bulbasaur', 'Charmander', 'Squirtle']);
     await render(hbs`
-      <PeopleList>
-        template block text
-      </PeopleList>
-    `);
+      <PeopleList
+        @title="List of Pokemon"
+        @people={{this.people}}
+    />`);
 
-    assert.dom().hasText('template block text');
+    assert.dom('h2').hasText('List of Pokemon');
   });
 });
